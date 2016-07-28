@@ -26,14 +26,18 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 var Player = function() {
-    this.pos=0;
+    this.x=0;
+    this.y=0;
+
+    this.sprite = "images/char-boy.png";
 }
 
 Player.prototype.update = function(c) {
-
+    
 }
 
 Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 Player.prototype.handleInput = function () {
