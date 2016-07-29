@@ -6,9 +6,9 @@ Simple 2d RPGMLTD _<- I have no idea which this means but I view this all t' tim
 
 **To Play**
 
-     * clone into empty directory
-     * run `python -m SimpleHTTPServer`
-     * open `localhost:8000` in browser
+- clone into empty directory
+- run ```python -m SimpleHTTPServer```
+- open ```localhost:8000``` in browser
      
 ## Game Play
 
