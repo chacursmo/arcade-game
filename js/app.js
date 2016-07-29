@@ -5,6 +5,9 @@ var Enemy = function() {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+    this.x=0;
+    
+    this.y=Math.floor(Math.random()) * (300-100) + 100;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -13,6 +16,11 @@ var Enemy = function() {
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
+    if (this.x > 550) {
+	this.x = 0;
+	this.y = Math.random() * (400 - 100) + 100;
+    }
+    this.x += Math.random() * (750 * (dt)) + (dt);
     // all computers.
 };
 
@@ -26,8 +34,8 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 var Player = function() {
-    this.x=0;
-    this.y=0;
+    this.x=200;
+    this.y=400;
 
     this.sprite = "images/char-boy.png";
 }
@@ -40,7 +48,24 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function () {
+Player.prototype.handleInput = function (key) {
+    switch (key) {
+    case "up":
+	this.y -= 50;
+	break;
+    case "down":
+	this.y += 50;
+	break;
+    case "left":
+	this.x -= 50;
+	break;
+    case "right":
+	this.x += 50;
+	break;
+    default:
+	console.log("Invalid key");
+	break;
+    }
 }
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -49,7 +74,7 @@ Player.prototype.handleInput = function () {
 var allEnemies = [];
 allEnemies[0] = new Enemy();
 allEnemies[1] = new Enemy();
-
+allEnemies[2] = new Enemy();
 var player = new Player();
 
 // This listens for key presses and sends the keys to your
