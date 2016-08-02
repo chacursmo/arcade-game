@@ -7,7 +7,7 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.x=0;
     
-    this.y=Math.floor(Math.random()) * (300-100) + 100;
+    this.y=Math.floor(Math.random()) * (250-100) + 100;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -18,7 +18,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     if (this.x > 550) {
 	this.x = 0;
-	this.y = Math.random() * (400 - 100) + 100;
+	this.y = Math.random() * (250 - 100) + 100;
     }
     this.x += Math.random() * (750 * (dt)) + (dt);
     // all computers.
@@ -89,3 +89,9 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+
+
+
+	    
