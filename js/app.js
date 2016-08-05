@@ -29,6 +29,17 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+var Gem = function() {
+    this.x = 200;
+    this.y = 50;
+    this.sprite = "images/abcd.png";
+    
+}
+
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -36,12 +47,12 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.x=200;
     this.y=400;
-
+    this.score = 0;
     this.sprite = "images/char-boy.png";
 }
 
 Player.prototype.update = function(c) {
-    
+    score.textContent = this.score;
 }
 
 Player.prototype.render = function() {
@@ -51,16 +62,16 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function (key) {
     switch (key) {
     case "up":
-	this.y -= 50;
+	this.y -= 30;
 	break;
     case "down":
-	this.y += 50;
+	this.y += 30;
 	break;
     case "left":
-	this.x -= 50;
+	this.x -= 30;
 	break;
     case "right":
-	this.x += 50;
+	this.x += 30;
 	break;
     default:
 	console.log("Invalid key");
@@ -77,6 +88,9 @@ allEnemies[1] = new Enemy();
 allEnemies[2] = new Enemy();
 var player = new Player();
 
+var allGems = [];
+allGems[0] = new Gem();
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -89,7 +103,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
 
 
 

@@ -13,7 +13,8 @@
  * the canvas' context (ctx) object globally available to make writing app.js
  * a little simpler to work with.
  */
-
+var score = document.querySelector("#score");
+score.textContent = player.score;
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -80,9 +81,38 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-   //     checkCollisions();
+        checkCollisions();
     }
 
+
+    function checkCollisions() {
+	if (player.x < -11 || player.y > 431 || player.x > 411 || player.y < 9) {
+	    if (player.y < 9 ) {
+
+		
+		score.textContent = player.score += 100;
+	    }
+
+	    reset();
+	}
+	
+	for (var i = 0; i < allEnemies.length; i++) {
+	    if ( Math.abs(allEnemies[i].x - player.x) < 30 &&
+		 Math.abs(allEnemies[i].y - player.y) < 30 ) {
+		reset();
+	    }
+	}
+
+	for (var i = 0; i < allGems.length; i++) {
+	    if ( Math.abs(allGems[i].x - player.x) < 30 &&
+		 Math.abs(allGems[i].y - player.y) < 30 ) {
+		player.score += 50;
+		allGems[i].x = 1000;
+	    }
+	}
+    }
+
+    
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -137,12 +167,15 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+
     }
 
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
      */
+
+
     function renderEntities() {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
@@ -150,6 +183,10 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
+
+	allGems.forEach(function(gem) {
+	    gem.render();
+	});
 
         player.render();
     }
@@ -159,7 +196,14 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-	console.log("whoa");
+	player.x = 1000;
+	player.y = 1000;
+
+	player = new Player();
+	if (lastTime) {
+	    update(Date.now() - lastTime / 1000);
+	    render();
+	}
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -171,7 +215,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+	'images/abcd.png'
     ]);
     Resources.onReady(init);
 
