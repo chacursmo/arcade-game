@@ -13,9 +13,13 @@
  * the canvas' context (ctx) object globally available to make writing app.js
  * a little simpler to work with.
  */
+
+
 var secret_mode = false;
+
 var score = document.querySelector("#score");
 score.textContent = player.score;
+
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -85,9 +89,13 @@ var Engine = (function(global) {
         checkCollisions();
     }
 
-
+    //custom function with much of the game play
+    
     function checkCollisions() {
-	if (player.x < -11 || player.y > 431 || player.x > 411 || player.y < 9) {
+	//checks whether player is out of bounds
+	if (player.x < -11 || player.y > 431 ||
+	    player.x > 411 || player.y < 9) {
+	    //if player has reached the water adds score and replaces gems
 	    if (player.y < 9 ) {
 		allGems.forEach(function(gem) {
 		    gem.update();
@@ -96,28 +104,34 @@ var Engine = (function(global) {
 		player.y=400;
 		score.textContent = player.score += 100;
 	    } else {
-
 		reset();
 	    }
 	}
 
+	//checks whether player is capturing a key
 	if ( Math.abs(player.x - the_only_key.x) < 30 &&
 	     Math.abs(player.y - the_only_key.y) < 30) {
+	    //sets flag variable
 	    secret_mode = true;
+	    //moves key off screen
 	    the_only_key.x = 1000;
 	}
 
+	//checks for collisions with enemies
 	for (var i = 0; i < allEnemies.length; i++) {
 	    if ( Math.abs(allEnemies[i].x - player.x) < 30 &&
 		 Math.abs(allEnemies[i].y - player.y) < 30 ) {
-	if ( ! secret_mode) {
-		reset();
-	} else {
-	    player.x += 10;
-	}
-	}
+		if ( ! secret_mode) {
+		    reset();
+		} else {
+		    //if player in secret mode (has capture key)
+		    //bug will only push player
+		    player.x += 10;
+		}
+	    }
 	}
 
+	//checks whether player is capturing a gem
 	for (var i = 0; i < allGems.length; i++) {
 	    if ( Math.abs(allGems[i].x - player.x) < 30 &&
 		 Math.abs(allGems[i].y - player.y) < 30 ) {
@@ -139,7 +153,6 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-
         player.update();
     }
 
@@ -213,11 +226,14 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-	player.x = 1000;
-	player.y = 1000;
+	//player is moved to starting area and score is set to zero
+	player.score=0;
+	player.x=200;
+	player.y=400;
+	//initial game condition are set, but no gems
 	secret_mode = false;
 	the_only_key.update();
-	player = new Player();
+
 	if (lastTime) {
 	    update(Date.now() - lastTime / 1000);
 	    render();
