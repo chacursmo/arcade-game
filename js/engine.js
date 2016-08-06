@@ -13,8 +13,6 @@
  * the canvas' context (ctx) object globally available to make writing app.js
  * a little simpler to work with.
  */
-
-
 var secret_mode = false;
 
 var score = document.querySelector("#score");
@@ -90,55 +88,55 @@ var Engine = (function(global) {
     }
 
     //custom function with much of the game play
-    
+
     function checkCollisions() {
-	//checks whether player is out of bounds
-	if (player.x < -11 || player.y > 431 ||
-	    player.x > 411 || player.y < 9) {
-	    //if player has reached the water adds score and replaces gems
-	    if (player.y < 9 ) {
-		allGems.forEach(function(gem) {
-		    gem.update();
-		});
-		player.x=200;
-		player.y=400;
-		score.textContent = player.score += 100;
-	    } else {
-		reset();
-	    }
-	}
+        //checks whether player is out of bounds
+        if (player.x < -11 || player.y > 431 ||
+            player.x > 411 || player.y < 9) {
+            //if player has reached the water adds score and replaces gems
+            if (player.y < 9) {
+                allGems.forEach(function(gem) {
+                    gem.update();
+                });
+                player.x = 200;
+                player.y = 400;
+                score.textContent = player.score += 100;
+            } else {
+                reset();
+            }
+        }
 
-	//checks whether player is capturing a key
-	if ( Math.abs(player.x - the_only_key.x) < 30 &&
-	     Math.abs(player.y - the_only_key.y) < 30) {
-	    //sets flag variable
-	    secret_mode = true;
-	    //moves key off screen
-	    the_only_key.x = 1000;
-	}
+        //checks whether player is capturing a key
+        if (Math.abs(player.x - the_only_key.x) < 30 &&
+            Math.abs(player.y - the_only_key.y) < 30) {
+            //sets flag variable
+            secret_mode = true;
+            //moves key off screen
+            the_only_key.x = 1000;
+        }
 
-	//checks for collisions with enemies
-	for (var i = 0; i < allEnemies.length; i++) {
-	    if ( Math.abs(allEnemies[i].x - player.x) < 30 &&
-		 Math.abs(allEnemies[i].y - player.y) < 30 ) {
-		if ( ! secret_mode) {
-		    reset();
-		} else {
-		    //if player in secret mode (has capture key)
-		    //bug will only push player
-		    player.x += 10;
-		}
-	    }
-	}
+        //checks for collisions with enemies
+        for (var i = 0; i < allEnemies.length; i++) {
+            if (Math.abs(allEnemies[i].x - player.x) < 30 &&
+                Math.abs(allEnemies[i].y - player.y) < 30) {
+                if (!secret_mode) {
+                    reset();
+                } else {
+                    //if player in secret mode (has capture key)
+                    //bug will only push player
+                    player.x += 10;
+                }
+            }
+        }
 
-	//checks whether player is capturing a gem
-	for (var i = 0; i < allGems.length; i++) {
-	    if ( Math.abs(allGems[i].x - player.x) < 30 &&
-		 Math.abs(allGems[i].y - player.y) < 30 ) {
-		player.score += 50;
-		allGems[i].x = 1000;
-	    }
-	}
+        //checks whether player is capturing a gem
+        for (var j = 0; j < allGems.length; j++) {
+            if (Math.abs(allGems[j].x - player.x) < 30 &&
+                Math.abs(allGems[j].y - player.y) < 30) {
+                player.score += 50;
+                allGems[j].x = 1000;
+            }
+        }
     }
 
 
@@ -167,12 +165,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 5,
@@ -213,10 +211,10 @@ var Engine = (function(global) {
             enemy.render();
         });
 
-	allGems.forEach(function(gem) {
-	    gem.render();
-	});
-	the_only_key.render();
+        allGems.forEach(function(gem) {
+            gem.render();
+        });
+        the_only_key.render();
         player.render();
 
     }
@@ -226,18 +224,18 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-	//player is moved to starting area and score is set to zero
-	player.score=0;
-	player.x=200;
-	player.y=400;
-	//initial game condition are set, but no gems
-	secret_mode = false;
-	the_only_key.update();
+        //player is moved to starting area and score is set to zero
+        player.score = 0;
+        player.x = 200;
+        player.y = 400;
+        //initial game condition are set, but no gems
+        secret_mode = false;
+        the_only_key.update();
 
-	if (lastTime) {
-	    update(Date.now() - lastTime / 1000);
-	    render();
-	}
+        if (lastTime) {
+            update(Date.now() - lastTime / 1000);
+            render();
+        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -250,8 +248,8 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-	'images/Blue-Gem.png',
-	'images/Key.png'
+        'images/Blue-Gem.png',
+        'images/Key.png'
 
     ]);
     Resources.onReady(init);
