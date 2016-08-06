@@ -6,7 +6,7 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.x=0;
-    
+
     this.y=Math.floor(Math.random()) * (250-100) + 100;
     this.sprite = 'images/enemy-bug.png';
 };
@@ -30,12 +30,32 @@ Enemy.prototype.render = function() {
 };
 
 var Gem = function() {
-    this.x = 200;
-    this.y = 50;
+    this.x = Math.random() * 400;
+    this.y = Math.random() * (250 - 100) + 100;
     this.sprite = "images/abcd.png";
-    
 }
 
+var Key = function() {
+    this.x = Math.random() * 400;
+    this.y = Math.random() * (250 - 100) + 100;
+    this.sprite = "images/Key.png";
+}
+
+
+Key.prototype.update = function() {
+    this.x = Math.random() * 400;
+    this.y = Math.random() * (250 - 100) + 100;
+}
+
+Key.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite),this.x,this.y);
+}
+
+Gem.prototype.update = function() {
+    this.x = Math.random() * 400;
+    this.y = Math.random() * (250 - 100) + 100;
+
+}
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
@@ -90,6 +110,10 @@ var player = new Player();
 
 var allGems = [];
 allGems[0] = new Gem();
+allGems[1] = new Gem();
+
+
+var the_only_key = new Key();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -103,8 +127,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-
-
-
-	    
