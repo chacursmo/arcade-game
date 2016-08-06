@@ -1,27 +1,26 @@
 // Enemies our player must avoid
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+    //initialization of Bugs
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.x=0;
-
-    this.y=Math.floor(Math.random()) * (250-100) + 100;
+    this.x = 0;
+    //Sets y coordinate to Random number between 250 and 100
+    this.y = Math.floor(Math.random()) * (250 - 100) + 100;
     this.sprite = 'images/enemy-bug.png';
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
+
+    //Functionality checks whether a bug has gone off screen
+    //resets to left side of screen
     if (this.x > 550) {
-	this.x = 0;
-	this.y = Math.random() * (250 - 100) + 100;
+        this.x = 0;
+        this.y = Math.random() * (250 - 100) + 100;
     }
+    //custom expression to change speed and position of bug
     this.x += Math.random() * (750 * (dt)) + (dt);
-    // all computers.
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -29,78 +28,86 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+//Gem object
 var Gem = function() {
+    //initialized to random spot on board
     this.x = Math.random() * 400;
     this.y = Math.random() * (250 - 100) + 100;
-    this.sprite = "images/abcd.png";
-}
+    this.sprite = "images/Blue-Gem.png";
+};
 
+//Key object
 var Key = function() {
+    //initialize to random area on board
     this.x = Math.random() * 400;
     this.y = Math.random() * (250 - 100) + 100;
     this.sprite = "images/Key.png";
-}
+};
 
-
+//key randomly placed during update
 Key.prototype.update = function() {
     this.x = Math.random() * 400;
     this.y = Math.random() * (250 - 100) + 100;
-}
+};
 
 Key.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite),this.x,this.y);
-}
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
+//gem randomly placed during update
 Gem.prototype.update = function() {
     this.x = Math.random() * 400;
     this.y = Math.random() * (250 - 100) + 100;
 
-}
+};
+
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
+//Player object
 var Player = function() {
-    this.x=200;
-    this.y=400;
+    //initial location
+    this.x = 200;
+    this.y = 400;
+    //score is initially zero
     this.score = 0;
     this.sprite = "images/char-boy.png";
-}
+};
 
-Player.prototype.update = function(c) {
+Player.prototype.update = function() {
+    //updates score displayed when appropriately called
     score.textContent = this.score;
-}
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
-Player.prototype.handleInput = function (key) {
+Player.prototype.handleInput = function(key) {
+    //switch statement sorts out which key is pressed
+    //changes player variables accordingly
     switch (key) {
-    case "up":
-	this.y -= 30;
-	break;
-    case "down":
-	this.y += 30;
-	break;
-    case "left":
-	this.x -= 30;
-	break;
-    case "right":
-	this.x += 30;
-	break;
-    default:
-	console.log("Invalid key");
-	break;
+        case "up":
+            this.y -= 30;
+            break;
+        case "down":
+            this.y += 30;
+            break;
+        case "left":
+            this.x -= 30;
+            break;
+        case "right":
+            this.x += 30;
+            break;
+        default:
+            console.log("Invalid key");
+            break;
     }
-}
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+};
+
+//Creating Bugs, Gems, Key and Player
 
 var allEnemies = [];
 allEnemies[0] = new Enemy();
