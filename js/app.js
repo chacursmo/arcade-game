@@ -73,6 +73,7 @@ var Player = function() {
     this.y = 400;
     //score is initially zero
     this.score = 0;
+    this.secret_mode=false;
     this.sprite = "images/char-boy.png";
 };
 

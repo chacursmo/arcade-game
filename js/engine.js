@@ -13,7 +13,7 @@
  * the canvas' context (ctx) object globally available to make writing app.js
  * a little simpler to work with.
  */
-var secret_mode = false;
+
 
 var score = document.querySelector("#score");
 score.textContent = player.score;
@@ -110,7 +110,7 @@ var Engine = (function(global) {
         if (Math.abs(player.x - the_only_key.x) < 30 &&
             Math.abs(player.y - the_only_key.y) < 30) {
             //sets flag variable
-            secret_mode = true;
+            player.secret_mode = true;
             //moves key off screen
             the_only_key.x = 1000;
         }
@@ -119,7 +119,7 @@ var Engine = (function(global) {
         for (var i = 0; i < allEnemies.length; i++) {
             if (Math.abs(allEnemies[i].x - player.x) < 30 &&
                 Math.abs(allEnemies[i].y - player.y) < 30) {
-                if (!secret_mode) {
+                if (!player.secret_mode) {
                     reset();
                 } else {
                     //if player in secret mode (has capture key)
@@ -229,7 +229,7 @@ var Engine = (function(global) {
         player.x = 200;
         player.y = 400;
         //initial game condition are set, but no gems
-        secret_mode = false;
+        player.secret_mode = false;
         the_only_key.update();
 
         if (lastTime) {
