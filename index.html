@@ -1,18 +1,114 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+<html lang="en">
+  <head>
 
-  <p>Score:</p>
-  <p id="score" class="center">0</p>
-  <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
 
-</body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sam Crouch's Portfolio</title>
+  </head>
+
+  <!-- Body of Content -->
+
+  <body>
+    <div class="container">
+      <header class="row col-12">
+	<div class="col-6">
+	  <div class="col-2 logo">
+	    <figure>
+	      <picture>
+		<img src="imgs/name-logo.svg" alt="Sam in cursive">
+	      </picture>
+	    </figure>
+	  </div>
+	</div>
+
+	<div class="col-5 name-title">
+	  <h1 class="owner-name">Sam Crouch</h1>
+	  <h3 class="job-name">Front-End Web Developer</h3>
+	</div>
+
+      </header>
+
+      <hr class="style col-12">
+
+      <main>
+	<article>
+	  <section class="row col-12">
+
+	    <!-- Main item of page -->
+
+	    <figure>
+	      <picture>
+		<source srcset="imgs/wash-terr-300-hq.jpg" media="(max-width: 550px)">
+		  <source srcset="imgs/wash-terr-600-hq.jpg" media="(max-width: 800px)">
+		    <img class="img-circle" src="imgs/wash-terr-1000-hq.jpg"  alt="Apartment Front">
+	    </picture>
+	    </figure>
+	  </section>
+
+	  <!-- More photos and links to future projects -->
+	  <!-- TODO: Finish projects and incorporate into page -->
+
+	  <section>
+	    <div class="row col-12">
+	      <h2 class="text-for-apps">Featured Work</h2>
+	      <div class="row-of-apps col-12">
+		<div class="individual-app">
+		  <figure>
+		    <picture>
+		      <img class="img-circle" src="imgs/mcclen-300-hq.jpg" alt="View of Courthouse">
+		    </picture>
+		  </figure>
+
+		    <p class="app-title">Interactive Resume</p>
+
+		  <div class="link-text">
+		    <a href="resume/index.html">Resume</a>
+		  </div>
+		</div>
+
+		<div class="individual-app">
+		  <figure>
+		    <picture>
+			<img class="img-circle" src="imgs/alico-300-hq.jpg" alt="Skyscrapers in Waco, Texas">
+		    </picture>
+		  </figure>
+
+		    <p class="app-title">Arcade Game</p>
+
+		  <div class="link-text">
+		    <a href="game/index.html">Arcade Game</a>
+		  </div>
+		</div>
+
+		<div class="individual-app">
+		  <figure>
+		    <picture>
+		      <img class="img-circle" src="imgs/mason-300-hq.jpg" alt="Front of Masonic Temple in Waco, Texas">
+		    </picture>
+		  </figure>
+
+		    <p class="app-title">Neighborhood Map</p>
+
+		  <div class="link-text">
+		    <a href="https://github.com/chacursmo/bicameral-computer/">github.com/chacursmo/bicameral-computer</a>
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	  </section>
+	</article>
+      </main>
+
+      <footer>
+	<hr class="style">
+	<p class="right-align-footer">chacursmo 2016</p>
+      </footer>
+
+    </div>
+  </body>
 </html>
